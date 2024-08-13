@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "punkvae"
+version = "0.1.0"
+description = "Variational Autoencoder for Cryptopunks"
+authors = ["marcreniel <marc@notmarc.me>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+matplotlib = "^3.9.2"
+tqdm = "^4.66.5"
+torchmetrics = "^1.4.1"
+torch = "^2.4.0"
+torchvision = "^0.19.0"
+numpy = "^2.0.1"
+
+[tool.poetry.group.dev.dependencies]
+jupyter = "^1.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
