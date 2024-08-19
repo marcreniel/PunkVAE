@@ -1,6 +1,6 @@
 # PunkVAE: Variational Autoencoder for CryptoPunks
 
-PunkVAE is a Variational Autoencoder (VAE) designed to generate new CryptoPunks from a latent space. By learning to encode and reconstruct 128x128x3 (RGB) CryptoPunks, the model creates new and unique CryptoPunk images when decoding from the latent space.
+PunkVAE is a generative model based on a Variational Autoencoder (VAE) architecture designed to generate new CryptoPunks from a latent space. By learning to encode and reconstruct 128x128 (RGB) CryptoPunks, the model creates new and unique CryptoPunk images when decoding from the latent space.
 
 ## Project Setup
 
@@ -27,7 +27,9 @@ The model is trained on the `huggingnft/cryptopunks` dataset, which consists of 
   - Layer 4: 256 filters, 3x3 kernel, ReLU activation, Max Pooling, and 38% Dropout.
   - These layers capture and compress features from the input image, progressively reducing its dimensionality.
 
-- **Latent Space:**
+- **Fully Connected Layers (Latent Space):**
+  - **fc1:** Projects the flattened output from the convolutional layers (256 * 8 * 8) to a 512-dimensional vector.
+  - **fc_mean & fc_logvar:** Map the 512-dimensional vector to the latent dimension (256), representing the mean and log-variance of the latent distribution. These layers facilitate the transition from high-level features to the latent space, defining the parameters of the Gaussian distribution from which latent variables are sampled.
   - **Latent Dimension:** 256.
   - The latent space encodes the compressed representation of the input image, serving as the basis for generating new CryptoPunks. The VAE learns to balance compression while maintaining useful image features.
 
@@ -49,4 +51,16 @@ The model is trained on the `huggingnft/cryptopunks` dataset, which consists of 
 ### Training:
 
 - **Batch Size:** 64. This batch size provides a good balance between training stability and memory efficiency. (This was all trained on an M1 Pro's Metal Performance Shaders!)
-- **Epochs:** 30. This number of epochs is selected to allow the model sufficient time to learn meaningful representations without overfitting the model and/or decreasing the value of the KL.
+- **Epochs:** 30. This number of epochs is selected to allow the model sufficient time to learn meaningful representations without overfitting the model and/or decreasing the value of the KL Divergence value.
+
+## Future Roadmap for PunkVAE
+
+- **PunkVAE -> PunktrVAE:**
+  - Transition the model from a Variational Autoencoder to a transfer Variational Autoencoder with faces. This will require combining another training dataset and training with transfer learning.
+  - Serving the model on an ML inference API (Amazon SageMaker? Hugging Face? Who knows...)
+  - Developing a full-stack app that allows you to take your face portrait and turn it into a CryptoPunk!
+
+## License
+
+- This project is licensed via GPLv3.
+  
