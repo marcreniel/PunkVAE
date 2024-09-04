@@ -109,7 +109,7 @@ class VAE(nn.Module):
 # Load the saved model
 @st.cache(allow_output_mutation=True)
 def load_model():
-    model = torch.load('../model/autoencoder_complete.pth', map_location=torch.device('cpu'))
+    model = torch.load('autoencoder_complete.pth', map_location=torch.device('cpu'))
     model.eval()
     return model
 
